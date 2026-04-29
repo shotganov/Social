@@ -1,0 +1,27 @@
+<svg
+  width="20"
+  height="16"
+  viewBox="0 0 20 16"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M6.25 1.5L7.2 0H12.8L13.75 1.5H16C17.6569 1.5 19 2.84315 19 4.5V12C19 13.6569 17.6569 15 16 15H4C2.34315 15 1 13.6569 1 12V4.5C1 2.84315 2.34315 1.5 4 1.5H6.25Z"
+    stroke="white"
+    stroke-width="2"
+    stroke-linejoin="round"
+  />
+  <circle
+    cx="10"
+    cy="8.25"
+    r="3.1"
+    stroke="white"
+    stroke-width="2"
+  />
+  <circle
+    cx="15"
+    cy="4.75"
+    r="0.9"
+    fill="white"
+  />
+</svg>
