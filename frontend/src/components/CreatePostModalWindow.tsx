@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import SocialIcon from "../../public/icon-social.svg?react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import EmojiIcon from "../../public/icon-emoji-gray.svg?react";
 import IconImg from "../../public/icon-image-gray.svg";
 import XIcon from "../../public/icon-x.svg?react";
@@ -74,7 +75,7 @@ export const CreatePostModalWindow = ({ setIsEdit }: Props) => {
     };
   }, []);
 
-  return (
+  return createPortal(
     <Box
       sx={{
         position: "fixed",
@@ -329,7 +330,8 @@ export const CreatePostModalWindow = ({ setIsEdit }: Props) => {
           )}
         </Box>
       </Box>
-    </Box>
+    </Box>,
+    document.body,
   );
 };
 

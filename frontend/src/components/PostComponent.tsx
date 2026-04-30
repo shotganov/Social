@@ -1,6 +1,7 @@
 import { Box, ButtonBase } from "@mui/material";
 import CommentIcon from "../../public/icon-comment.svg?react";
 import HeartIcon from "../../public/icon-like.svg?react";
+import ReportIcon from "../../public/icon-report.svg?react";
 import SocialIcon from "../../public/icon-social.svg";
 import { type Post } from "../types/Post";
 import type { User } from "../types/User";
@@ -9,6 +10,7 @@ import { ModalWindowPostComments } from "./ModalWindowPostComments";
 import { ImagePreviewModal } from "./ImagePreviewModal";
 import { PostPage } from "../pages/PostPage";
 import { useNavigate } from "react-router-dom";
+import { ReportPostModal } from "./ReportPostModal";
 
 const user: User = {
   id: 1,
@@ -39,6 +41,7 @@ export const PostComponent = ({
 }: PostComponentProps) => {
   const navigate = useNavigate();
   const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
   const [previewIndex, setPreviewIndex] = useState<number | null>(null);
   const images = post.images?.slice(0, 4) ?? [];
 
@@ -76,8 +79,15 @@ export const PostComponent = ({
           flex: 1,
         }}
       >
-        <Box sx={{ fontSize: 17, fontWeight: 500, lineHeight: 1.2 }}>
-          {post.user.username}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+          }}
+        >
+          <Box sx={{ fontSize: 17, fontWeight: 500, lineHeight: 1.2 }}>
+            {post.user.username}
+          </Box>
         </Box>
 
         <Box sx={{ fontSize: 15, lineHeight: 1.5, color: "#334765" }}>
@@ -93,78 +103,103 @@ export const PostComponent = ({
             display: "flex",
             alignItems: "center",
             color: "#334765",
-            justifyContent: "flex-start",
+            justifyContent: "space-between",
             mt: -0.5,
             ml: -0.8,
           }}
         >
-          <ButtonBase
-            sx={{
-              px: 1,
-              pl: 0.5,
-              py: 0.5,
-              borderRadius: 3,
-              fontSize: 14,
-              fontWeight: 500,
-              display: "flex",
-              color: "#64748b",
-              alignItems: "center",
-              transition: "background-color 180ms ease",
-              "&:hover": {
-                color: "#fb2c36",
-                backgroundColor: "rgba(251, 44, 54, 0.12)",
-              },
-            }}
-          >
-            <Box
-              component={HeartIcon}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <ButtonBase
+              sx={{
+                px: 1,
+                pl: 0.5,
+                py: 0.5,
+                borderRadius: 3,
+                fontSize: 14,
+                fontWeight: 500,
+                display: "flex",
+                color: "#64748b",
+                alignItems: "center",
+                transition: "background-color 180ms ease",
+                "&:hover": {
+                  color: "#fb2c36",
+                  backgroundColor: "rgba(251, 44, 54, 0.12)",
+                },
+              }}
+            >
+              <Box
+                component={HeartIcon}
+                sx={{
+                  width: 24,
+                  height: 18,
+                  flexShrink: 0,
+                  color: "inherit",
+                  display: "block",
+                }}
+              />
+              {post.likes}
+            </ButtonBase>
+
+            <ButtonBase
+              onClick={() => {
+                if (!commentsDisabled) {
+                  setIsCommentsOpen(true);
+                  navigate(`/post/${post.id}`);
+                }
+              }}
+              sx={{
+                px: 1,
+                pl: 0.5,
+                py: 0.5,
+                borderRadius: 3,
+                fontSize: 14,
+                fontWeight: 500,
+                display: "flex",
+                alignItems: "center",
+                color: "#64748b",
+                transition: "background-color 180ms ease",
+                "&:hover": {
+                  color: "#2b7fff",
+                  backgroundColor: "rgba(43, 127, 255, 0.12)",
+                },
+              }}
+            >
+              <Box
+                component={CommentIcon}
+                sx={{
+                  width: 23,
+                  height: 19,
+                  flexShrink: 0,
+                  color: "inherit",
+                  display: "block",
+                }}
+              />
+              {post.comments}
+            </ButtonBase>
+          </Box>
+
+          {!embedded && (
+            <ButtonBase
+              onClick={() => setIsReportOpen(true)}
               sx={{
                 width: 24,
-                height: 18,
-                flexShrink: 0,
-                color: "inherit",
-                display: "block",
+                height: 24,
+                mr: -0.25,
+                borderRadius: "50%",
+                color: "#64748b",
+                transition: "background-color 180ms ease, color 180ms ease",
+                "&:hover": {
+                  color: "#2563ff",
+                  backgroundColor: "rgba(43, 127, 255, 0.12)",
+                },
               }}
-            />
-            {post.likes}
-          </ButtonBase>
-
-          <ButtonBase
-            onClick={() => {
-              if (!commentsDisabled) {
-                setIsCommentsOpen(true);
-                navigate(`/post/${post.id}`);
-              }
-            }}
-            sx={{
-              px: 1,
-              pl: 0.5,
-              py: 0.5,
-              borderRadius: 3,
-              fontSize: 14,
-              fontWeight: 500,
-              display: "flex",
-              alignItems: "center",
-              color: "#64748b",
-              transition: "background-color 180ms ease",
-              "&:hover": {
-                color: "#2b7fff",
-                backgroundColor: "rgba(43, 127, 255, 0.12)",
-              },
-            }}
-          >
-            <Box
-              component={CommentIcon}
-              sx={{
-                width: 23,
-                height: 19,
-                flexShrink: 0,
-                color: "inherit",
-                display: "block",
-              }}
-            />
-            {post.comments}
-          </ButtonBase>
+            >
+              <Box
+                component={ReportIcon}
+                sx={{ width: 17.5, height: 17.5 , color: "inherit" }}
+              />
+            </ButtonBase>
+          )}
         </Box>
       </Box>
 
@@ -175,6 +210,10 @@ export const PostComponent = ({
           setIndex={setPreviewIndex}
           onClose={() => setPreviewIndex(null)}
         />
+      )}
+
+      {isReportOpen && (
+        <ReportPostModal onClose={() => setIsReportOpen(false)} />
       )}
     </Box>
   );
@@ -205,9 +244,11 @@ const PostImages = ({ images, onImageClick }: PostImagesProps) => {
           onClick={() => onImageClick(0)}
           sx={{
             display: "block",
-            width: "auto",
-            maxWidth: "100%",
-            maxHeight: 500,
+            height: "auto",
+            maxHeight: 510,
+            "@media (max-width: 800px)": {
+              maxHeight: "none",
+            },
             borderRadius: 3,
             objectFit: "contain",
             cursor: "pointer",
@@ -217,10 +258,22 @@ const PostImages = ({ images, onImageClick }: PostImagesProps) => {
     );
   }
 
-  const gridTemplateRows = {
-    2: "260px",
-    3: "190px 190px",
-    4: "190px 190px",
+  const imageGridSx = {
+    2: {
+      aspectRatio: "2 / 1",
+      gridTemplateColumns: "1fr 1fr",
+      gridTemplateRows: "1fr",
+    },
+    3: {
+      aspectRatio: "1.6 / 1",
+      gridTemplateColumns: "1fr 1fr",
+      gridTemplateRows: "1fr 1fr",
+    },
+    4: {
+      aspectRatio: "1 / 0.7",
+      gridTemplateColumns: "1fr 1fr",
+      gridTemplateRows: "1fr 1fr",
+    },
   }[imageCount];
 
   return (
@@ -229,11 +282,9 @@ const PostImages = ({ images, onImageClick }: PostImagesProps) => {
         display: "grid",
         gap: 0.5,
         width: "100%",
-        maxHeight: 420,
         overflow: "hidden",
         borderRadius: 3,
-        gridTemplateColumns: "1fr 1fr",
-        gridTemplateRows,
+        ...imageGridSx,
       }}
     >
       {images.map((image, index) => (

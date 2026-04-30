@@ -287,6 +287,9 @@ export const SearchPanel = ({ isSearchPage }: Props) => {
       sx={{
         width: 320,
         flexShrink: 0,
+        "@media (max-width: 1100px)": {
+          display: "none",
+        },
       }}
     >
       <Paper

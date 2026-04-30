@@ -15,6 +15,15 @@ export const MainPage = () => {
         justifyContent: "center",
         gap: isChatsPage ? 0 : 3,
         px: 3,
+        pb: 0,
+        minHeight: "100vh",
+        "@media (max-width: 800px)": {
+          px: 0,
+          pb: 9,
+          "body.chat-dialog-open &": {
+            pb: 0,
+          },
+        },
       }}
     >
       <SideBar isChatsPage={isChatsPage} />
@@ -25,6 +34,9 @@ export const MainPage = () => {
         sx={{
           m: 0,
           maxWidth: isChatsPage ? "968px" : "600px",
+          "@media (max-width: 800px)": {
+            maxWidth: "100%",
+          },
         }}
       >
         <Outlet />
