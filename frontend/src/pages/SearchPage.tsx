@@ -1,6 +1,6 @@
 ﻿import { useMemo, useState } from "react";
 import { Box, ButtonBase, Paper } from "@mui/material";
-import SocialIcon from "@public/icon-social.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
 import { useSearchParams } from "react-router-dom";
 import { colors, radius, transitions } from "@shared/styles";
 import { SearchInput } from "@shared/ui";

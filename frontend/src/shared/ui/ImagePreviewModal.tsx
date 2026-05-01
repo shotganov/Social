@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { Box, IconButton } from "@mui/material";
-import XIcon from "@public/icon-x.svg?react";
-import ChevronLeftIcon from "@public/icon-chevron-left.svg?react";
+import XIcon from "@shared/assets/icons/icon-x.svg?react";
+import ChevronLeftIcon from "@shared/assets/icons/icon-chevron-left.svg?react";
 import { Modal } from "./modal";
 import { alphaColors, colors, transitions } from "../styles/tokens";
 

@@ -2,7 +2,7 @@ import { Box, ButtonBase } from "@mui/material";
 import { colors } from "@shared/styles";
 import { Avatar } from "@shared/ui";
 import type { User } from "@shared/model";
-import SocialIcon from "@public/icon-social.svg";
+import SocialIcon from "@shared/assets/icons/icon-social.svg";
 
 type Props = {
   user: User;

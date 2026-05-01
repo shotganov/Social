@@ -1,6 +1,6 @@
 import { Box, InputBase, Paper } from "@mui/material";
 import { useState } from "react";
-import SocialIcon from "@public/icon-social.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
 import { colors, radius } from "@shared/styles";
 import { CreatePostModal } from "./CreatePostModal";
 

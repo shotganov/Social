@@ -1,6 +1,6 @@
 ﻿import { Box, ButtonBase } from "@mui/material";
 import { useState } from "react";
-import SocialIcon from "@public/icon-social.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
 import { Title, SearchInput } from "@shared/ui";
 import type { Chat } from "../model/Chat";
 

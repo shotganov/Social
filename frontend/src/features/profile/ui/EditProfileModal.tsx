@@ -1,8 +1,8 @@
 ﻿import { Box, Paper, InputBase, TextareaAutosize } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import ProfileCoverImage from "@public/profile-background.jpg";
-import SocialIcon from "@public/icon-social.svg?react";
-import CameraIcon from "@public/icon-camera-new.svg";
+import ProfileCoverImage from "@shared/assets/images/profile-background.jpg";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
+import CameraIcon from "@shared/assets/icons/icon-camera-new.svg";
 import { useAppDispatch } from "@app/hooks";
 import { setUser } from "@entities/user";
 import type { User } from "@shared/model";

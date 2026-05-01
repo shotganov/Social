@@ -2,8 +2,8 @@
 import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
 import { PostComponent, defaultPost } from "@entities/post";
 import { PostActions } from "@features/posts";
-import SocialIcon from "@public/icon-social.svg";
-import BackIcon from "@public/icon-back.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg";
+import BackIcon from "@shared/assets/icons/icon-back.svg?react";
 import type { User } from "@shared/model";
 import { useNavigate } from "react-router-dom";
 import { colors, transitions } from "@shared/styles";

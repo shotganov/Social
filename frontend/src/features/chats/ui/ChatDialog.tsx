@@ -1,7 +1,7 @@
 ﻿import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
-import BackIcon from "@public/icon-back.svg?react";
-import SendIcon from "@public/icon-send.svg?react";
-import SocialIcon from "@public/icon-social.svg?react";
+import BackIcon from "@shared/assets/icons/icon-back.svg?react";
+import SendIcon from "@shared/assets/icons/icon-send.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
 import type { Chat, ChatMessage } from "../model/Chat";
 import { Message } from "./Message";
 import { messageInputWrapSx, sendBtnSx } from "./chatStyles";

@@ -1,8 +1,8 @@
 ﻿import { type FormEvent, useEffect, useState } from "react";
 import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import AtIcon from "@public/icon-at.svg?react";
-import LockIcon from "@public/icon-lock.svg?react";
+import AtIcon from "@shared/assets/icons/icon-at.svg?react";
+import LockIcon from "@shared/assets/icons/icon-lock.svg?react";
 import { useLogin, useRegister, selectToken, type Auth } from "@features/auth";
 import { useAppSelector } from "@app/hooks";
 import { colors, transitions } from "@shared/styles";

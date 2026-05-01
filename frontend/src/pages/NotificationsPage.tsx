@@ -1,6 +1,6 @@
 ﻿import { Box } from "@mui/material";
 import { Notification, type NotificationType } from "@features/notifications";
-import SocialIcon from "@public/icon-social.svg";
+import SocialIcon from "@shared/assets/icons/icon-social.svg";
 import { Title } from "@shared/ui";
 
 export const NotificationsPage = () => {

@@ -45,7 +45,7 @@
 
 // SearchInput.tsx
 import { InputBase, Paper } from "@mui/material";
-import SearchIcon from "@public/icon-search.svg?react";
+import SearchIcon from "@shared/assets/icons/icon-search.svg?react";
 import { colors, radius, transitions } from "../styles/tokens";
 
 // type SearchInputProps = {

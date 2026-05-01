@@ -1,5 +1,5 @@
 import { Box, ButtonBase } from "@mui/material";
-import MoreIcon from "@public/icon-more.svg?react";
+import MoreIcon from "@shared/assets/icons/icon-more.svg?react";
 import type { User } from "@shared/model";
 import { breakpoints, colors, radius, transitions } from "@shared/styles";
 import { Avatar } from "@shared/ui";

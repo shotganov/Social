@@ -14,7 +14,7 @@ import {
   transitions,
 } from "@shared/styles";
 import { Title } from "@shared/ui";
-import SocialIcon from "@public/icon-social.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
 import { SideBarNav } from "./SideBarNav";
 import { SideBarProfile } from "./SideBarProfile";
 

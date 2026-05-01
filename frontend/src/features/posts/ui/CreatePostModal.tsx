@@ -7,10 +7,10 @@ import {
 import { useEffect, useRef, useState } from "react";
 import EmojiPicker, { type EmojiClickData } from "emoji-picker-react";
 import { useImmer } from "use-immer";
-import SocialIcon from "@public/icon-social.svg?react";
-import EmojiIcon from "@public/icon-emoji-gray.svg?react";
-import IconImg from "@public/icon-image-gray.svg";
-import XIcon from "@public/icon-x.svg?react";
+import SocialIcon from "@shared/assets/icons/icon-social.svg?react";
+import EmojiIcon from "@shared/assets/icons/icon-emoji-gray.svg?react";
+import IconImg from "@shared/assets/icons/icon-image-gray.svg";
+import XIcon from "@shared/assets/icons/icon-x.svg?react";
 import {
   CharacterCounter,
   Modal,

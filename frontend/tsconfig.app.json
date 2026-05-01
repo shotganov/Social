@@ -22,8 +22,7 @@
       "@widgets/*": ["./src/widgets/*"],
       "@features/*": ["./src/features/*"],
       "@entities/*": ["./src/entities/*"],
-      "@shared/*": ["./src/shared/*"],
-      "@public/*": ["./public/*"]
+      "@shared/*": ["./src/shared/*"]
     },
 
     /* Linting */

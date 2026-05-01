@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Box, ButtonBase } from "@mui/material";
-import CommentIcon from "@public/icon-comment.svg?react";
-import HeartIcon from "@public/icon-like.svg?react";
-import ReportIcon from "@public/icon-report.svg?react";
+import CommentIcon from "@shared/assets/icons/icon-comment.svg?react";
+import HeartIcon from "@shared/assets/icons/icon-like.svg?react";
+import ReportIcon from "@shared/assets/icons/icon-report.svg?react";
 import { alphaColors, colors, transitions, radius } from "@shared/styles";
 import { ReportPostModal } from "./ReportPostModal";
 

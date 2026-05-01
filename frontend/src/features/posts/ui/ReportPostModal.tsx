@@ -1,6 +1,6 @@
 import { Box, ButtonBase } from "@mui/material";
 import { useState } from "react";
-import XIcon from "@public/icon-x.svg?react";
+import XIcon from "@shared/assets/icons/icon-x.svg?react";
 import { Modal, ModalContent } from "@shared/ui";
 import { alphaColors, colors, radius, transitions } from "@shared/styles";
 

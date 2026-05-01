@@ -1,9 +1,9 @@
 import { Box, ButtonBase } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ProfileCoverImage from "@public/profile-background.jpg";
-import SocialIcon from "@public/icon-social.svg";
-import BackIcon from "@public/icon-back.svg?react";
+import ProfileCoverImage from "@shared/assets/images/profile-background.jpg";
+import SocialIcon from "@shared/assets/icons/icon-social.svg";
+import BackIcon from "@shared/assets/icons/icon-back.svg?react";
 import { alphaColors, colors, transitions } from "@shared/styles";
 import type { User } from "@shared/model";
 import { EditProfileModal } from "@features/profile";

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Box, ButtonBase, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import SearchIcon from "@public/icon-search.svg?react";
+import SearchIcon from "@shared/assets/icons/icon-search.svg?react";
 import { alphaColors, breakpoints, colors, radius } from "@shared/styles";
 import { SearchInput } from "@shared/ui";
 import { UserCard } from "@entities/user";
