@@ -1,10 +1,12 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
-import { PostComponent } from "../components/PostComponent";
-import SocialIcon from "../../public/icon-social.svg";
-import BackIcon from "../../public/icon-back.svg?react";
-import type { User } from "../types/User";
+import { PostComponent, defaultPost } from "@entities/post";
+import { PostActions } from "@features/posts";
+import SocialIcon from "@public/icon-social.svg";
+import BackIcon from "@public/icon-back.svg?react";
+import type { User } from "@shared/model";
 import { useNavigate } from "react-router-dom";
+import { colors, transitions } from "@shared/styles";
 
 type Comment = {
   id: number;
@@ -22,7 +24,7 @@ const commentsMock: Comment[] = [
       avatar: SocialIcon,
       bio: "",
     },
-    content: "Отличный пост, интересно почитать продолжение.",
+    content: "Отличный пост! Очень понравилось.",
   },
   {
     id: 2,
@@ -77,8 +79,8 @@ export const PostPage = () => {
         sx={{
           mt: 1,
           borderRadius: 4,
-          border: "1px solid #e2e8f0",
-          backgroundColor: "#ffffff",
+          border: `1px solid ${colors.border}`,
+          backgroundColor: colors.surface,
           overflow: "hidden",
         }}
       >
@@ -90,7 +92,7 @@ export const PostPage = () => {
             p: 1,
             pl: 2.7,
             fontSize: "20px",
-            borderBottom: "1px solid #e2e8f0",
+            borderBottom: `1px solid ${colors.border}`,
             fontWeight: "700",
           }}
         >
@@ -100,11 +102,11 @@ export const PostPage = () => {
               width: 36,
               height: 36,
               borderRadius: "50%",
-              color: "#8D9DB4",
-              transition: "background-color 180ms ease, color 180ms ease",
+              color: colors.textMuted,
+              transition: transitions.backgroundAndColor,
               "&:hover": {
-                color: "#64748b",
-                backgroundColor: "#f1f5f9",
+                color: colors.text,
+                backgroundColor: colors.inputFocusBg,
               },
             }}
           >
@@ -120,7 +122,17 @@ export const PostPage = () => {
           <Box>Пост</Box>
         </Box>
 
-        <PostComponent embedded />
+        <PostComponent
+          embedded
+          post={defaultPost}
+          actions={
+            <PostActions
+              likes={defaultPost.likes}
+              comments={defaultPost.comments}
+              showReport={false}
+            />
+          }
+        />
 
         <Box
           sx={{
@@ -129,8 +141,8 @@ export const PostPage = () => {
             p: 2,
             // borderRadius: 4,
             alignItems: "center",
-            borderTop: "1px solid #e2e8f0",
-            backgroundColor: "#ffffff",
+            borderTop: `1px solid ${colors.border}`,
+            backgroundColor: colors.surface,
           }}
         >
           <Box
@@ -150,8 +162,8 @@ export const PostPage = () => {
               px: 1.75,
               py: 1,
               borderRadius: 3,
-              border: "1px solid #dbe4f0",
-              backgroundColor: "#f8fafc",
+              border: `1px solid ${colors.inputBorder}`,
+              backgroundColor: colors.inputBg,
             }}
           >
             <InputBase
@@ -164,7 +176,7 @@ export const PostPage = () => {
                 flex: 1,
                 fontSize: 15,
                 lineHeight: 1.5,
-                color: "#334765",
+                color: colors.text,
               }}
             />
 
@@ -178,14 +190,14 @@ export const PostPage = () => {
                 fontSize: 14,
                 fontWeight: 700,
                 lineHeight: 1.2,
-                color: "#ffffff",
-                backgroundColor: "#2563ff",
-                transition: "background-color 180ms ease, opacity 180ms ease",
+                color: colors.surface,
+                backgroundColor: colors.iconMuted,
+                transition: transitions.backgroundAndBorder,
                 "&:hover": {
-                  backgroundColor: "#1d4ed8",
+                  backgroundColor: colors.accentHover,
                 },
                 "&.Mui-disabled": {
-                  color: "#ffffff",
+                  color: colors.surface,
                   opacity: 0.45,
                 },
               }}
@@ -206,8 +218,8 @@ export const PostPage = () => {
               gap: 2,
               p: 2,
               borderRadius: 4,
-              border: "1px solid #e2e8f0",
-              backgroundColor: "#ffffff",
+              border: `1px solid ${colors.border}`,
+              backgroundColor: colors.surface,
             }}
           >
             <Box
@@ -226,7 +238,7 @@ export const PostPage = () => {
                   mt: 0.5,
                   fontSize: 15,
                   lineHeight: 1.45,
-                  color: "#334765",
+                  color: colors.textSoft,
                 }}
               >
                 {comment.content}

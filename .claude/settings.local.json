@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"D:\\\\ИГЭУ\\\\Social\\\\frontend\\\\src\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(rm -rf node_modules/.tmp)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT=$?\")"
+    ]
+  }
+}

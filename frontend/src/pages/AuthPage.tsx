@@ -1,12 +1,11 @@
-import { type FormEvent, useEffect, useState } from "react";
+﻿import { type FormEvent, useEffect, useState } from "react";
 import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import AtIcon from "../../public/icon-at.svg?react";
-import LockIcon from "../../public/icon-lock.svg?react";
-import { useLogin, useRegister } from "../hooks/useAuth";
-import { useAppSelector } from "../store/hooks";
-import { selectToken } from "../store/selectors";
-import type { Auth } from "../types/Auth";
+import AtIcon from "@public/icon-at.svg?react";
+import LockIcon from "@public/icon-lock.svg?react";
+import { useLogin, useRegister, selectToken, type Auth } from "@features/auth";
+import { useAppSelector } from "@app/hooks";
+import { colors, transitions } from "@shared/styles";
 
 export const AuthPage = () => {
   const [mode, setMode] = useState<"login" | "register">("login");
@@ -83,8 +82,8 @@ export const AuthPage = () => {
         minHeight: "100vh",
         display: "grid",
         gridTemplateColumns: { xs: "1fr", md: "minmax(320px, 0.55fr) 1fr" },
-        backgroundColor: "#ffffff",
-        color: "#0f172a",
+        backgroundColor: colors.surface,
+        color: colors.text,
       }}
     >
       <Box
@@ -95,7 +94,7 @@ export const AuthPage = () => {
           justifyContent: "center",
           px: 5,
           pb: 8,
-          borderRight: "1px solid #e2e8f0",
+          borderRight: `1px solid ${colors.border}`,
           borderBottom: "none",
           textAlign: "right",
         }}
@@ -105,7 +104,7 @@ export const AuthPage = () => {
             fontSize: { sm: 44, lg: 50 },
             lineHeight: 1,
             fontWeight: 700,
-            color: "#2563ff",
+            color: colors.accent,
           }}
         >
           {title}
@@ -116,7 +115,7 @@ export const AuthPage = () => {
             mt: 1.5,
             fontSize: { xs: 17, md: 19 },
             fontWeight: 700,
-            color: "#334765",
+            color: colors.text,
           }}
         >
           {subtitle}
@@ -162,7 +161,7 @@ export const AuthPage = () => {
                 fontSize: 40,
                 lineHeight: 1,
                 fontWeight: 700,
-                color: "#2563ff",
+                color: colors.accent,
               }}
             >
               {title}
@@ -171,7 +170,7 @@ export const AuthPage = () => {
               sx={{
                 fontSize: 17,
                 fontWeight: 700,
-                color: "#334765",
+                color: colors.textSoft,
               }}
             >
               {subtitle}
@@ -220,7 +219,7 @@ export const AuthPage = () => {
           )}
 
           {error && (
-            <Box sx={{ fontSize: 15, fontWeight: 700, color: "#dc2626" }}>
+            <Box sx={{ fontSize: 15, fontWeight: 700, color: colors.error }}>
               {error}
             </Box>
           )}
@@ -256,7 +255,7 @@ const labelSx = {
   mb: 0.75,
   fontSize: 15,
   fontWeight: 700,
-  color: "#64748b",
+  color: colors.textMuted,
 } as const;
 
 const inputSx = {
@@ -266,19 +265,19 @@ const inputSx = {
   gap: 1,
   borderRadius: 3,
   border: "1px solid transparent",
-  backgroundColor: "#f8fafc",
-  color: "#0f172a",
+  backgroundColor: colors.inputBg,
+  color: colors.text,
   fontSize: 16,
-  transition: "background-color 180ms ease",
+  transition: transitions.background,
   "& input": {
     p: 0,
     "&::placeholder": {
-      color: "#64748b",
+      color: colors.textMuted,
       opacity: 1,
     },
   },
   "&:focus-within": {
-    backgroundColor: "#eef2f7",
+    backgroundColor: colors.inputFocusBg,
   },
   "&.Mui-disabled": {
     opacity: 0.65,
@@ -295,17 +294,17 @@ const submitButtonSx = {
   minHeight: 48,
   px: 3,
   borderRadius: 999,
-  backgroundColor: "#2563ff",
-  color: "#ffffff",
+  backgroundColor: colors.accent,
+  color: colors.surface,
   fontSize: 16,
   fontWeight: 700,
-  transition: "background-color 180ms ease, opacity 180ms ease",
+  transition: transitions.backgroundAndOpacity,
   "&:hover": {
-    backgroundColor: "#1d4ed8",
+    backgroundColor: colors.accentHover,
   },
   "&.Mui-disabled": {
     opacity: 0.65,
-    color: "#ffffff",
+    color: colors.surface,
   },
 } as const;
 
@@ -313,32 +312,16 @@ const secondaryButtonSx = {
   minHeight: 48,
   px: 3,
   borderRadius: 999,
-  backgroundColor: "#f8fafc",
-  color: "#334765",
+  backgroundColor: colors.inputBg,
+  color: colors.textSoft,
   fontSize: 16,
   fontWeight: 700,
-  transition: "background-color 180ms ease, opacity 180ms ease",
+  transition: transitions.backgroundAndOpacity,
   "&:hover": {
-    backgroundColor: "#eef2f7",
+    backgroundColor: colors.inputFocusBg,
   },
   "&.Mui-disabled": {
     opacity: 0.65,
-    color: "#64748b",
+    color: colors.textMuted,
   },
 } as const;
-
-const modeButtonSx = (muted: boolean) =>
-  ({
-    minHeight: 56,
-    px: 4,
-    flex: { xs: 1, md: "initial" },
-    borderRadius: 999,
-    backgroundColor: muted ? "#f8fafc" : "#2563ff",
-    color: muted ? "#334765" : "#ffffff",
-    fontSize: 16,
-    fontWeight: 700,
-    transition: "background-color 180ms ease",
-    "&:hover": {
-      backgroundColor: muted ? "#eef2f7" : "#1d4ed8",
-    },
-  }) as const;

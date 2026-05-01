@@ -1,9 +1,11 @@
-import { useMemo, useState } from "react";
-import { Box, ButtonBase, InputBase, Paper } from "@mui/material";
-import SearchIcon from "../../public/icon-search.svg?react";
-import SocialIcon from "../../public/icon-social.svg?react";
-import { PostComponent } from "../components/PostComponent";
+﻿import { useMemo, useState } from "react";
+import { Box, ButtonBase, Paper } from "@mui/material";
+import SocialIcon from "@public/icon-social.svg?react";
 import { useSearchParams } from "react-router-dom";
+import { colors, radius, transitions } from "@shared/styles";
+import { SearchInput } from "@shared/ui";
+import { mockPosts } from "@entities/post";
+import { PostsList } from "@widgets/posts";
 
 type SearchMode = "users" | "posts";
 
@@ -11,12 +13,8 @@ type SearchUser = {
   id: number;
   username: string;
   tag: string;
-};
-
-type SearchPost = {
-  id: number;
-  author: string;
-  content: string;
+  avatar: string;
+  bio: string;
 };
 
 const users: SearchUser[] = [
@@ -24,26 +22,36 @@ const users: SearchUser[] = [
     id: 1,
     username: "Maria",
     tag: "marianovikova",
+    avatar: "",
+    bio: "",
   },
   {
     id: 2,
     username: "Masha",
     tag: "masha.desktop",
+    avatar: "",
+    bio: "",
   },
   {
     id: 3,
     username: "Mediana",
     tag: "mediana.dev",
+    avatar: "",
+    bio: "",
   },
   {
     id: 4,
     username: "Misha",
     tag: "misha.lopasti",
+    avatar: "",
+    bio: "",
   },
   {
     id: 5,
     username: "Noshpa",
     tag: "nospa.chemistry",
+    avatar: "",
+    bio: "",
   },
 ];
 
@@ -72,8 +80,6 @@ const users: SearchUser[] = [
 //   },
 // ];
 
-const Posts = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") ?? "");
@@ -101,6 +107,11 @@ export const SearchPage = () => {
   //   );
   // }, [normalizedQuery]);
 
+  const handleSearch = () => {
+    const nextQuery = query.trim();
+    if (!nextQuery) return;
+  };
+
   const filters: { label: string; value: SearchMode }[] = [
     { label: "Посты", value: "posts" },
     { label: "Люди", value: "users" },
@@ -125,49 +136,26 @@ export const SearchPage = () => {
         elevation={0}
         sx={{
           p: 2,
-          borderRadius: 4,
-          border: "1px solid #e2e8f0",
-          backgroundColor: "#ffffff",
+          borderRadius: radius.lg,
+          border: `1px solid ${colors.border}`,
+          backgroundColor: colors.surface,
         }}
       >
-        <Paper
-          elevation={0}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            px: 1.75,
-            py: 1.25,
-            borderRadius: 3,
-            border: "1px solid #dbe4f0",
-            backgroundColor: "#f8fafc",
-            color: "#8FA1BF",
-            transition: "background-color 180ms ease, border-color 180ms ease",
-
-            "&:focus-within": {
-              backgroundColor: "#eef2f7",
-              borderColor: "#c6d2e1",
-            },
-          }}
-        >
-          <SearchIcon />
-          <InputBase
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Поиск пользователей и постов..."
-            sx={{
-              width: "100%",
-              fontSize: 15,
-              color: "#0f172a",
-            }}
-          />
-        </Paper>
-
+        <SearchInput
+          value={query}
+          onChange={setQuery}
+          onSearch={handleSearch}
+          placeholder={
+            mode === "users" ? "Поиск пользователей..." : "Поиск постов..."
+          }
+          px={1.75}
+          py={1.25}
+        />
         <Box
           sx={{
             display: "flex",
             gap: 1,
-            mt: 2,
+            mt: 1.5,
             flexWrap: "wrap",
           }}
         >
@@ -178,19 +166,22 @@ export const SearchPage = () => {
               sx={{
                 px: 1.5,
                 py: 0.9,
-                borderRadius: 999,
+                borderRadius: radius.pill,
                 border:
                   mode === filter.value
                     ? "1px solid transparent"
-                    : "1px solid #dbe4f0",
-                backgroundColor: mode === filter.value ? "#edf4ff" : "#ffffff",
-                color: mode === filter.value ? "#2563ff" : "#334765",
+                    : `1px solid ${colors.inputBorder}`,
+                backgroundColor:
+                  mode === filter.value ? colors.activeBg : colors.surface,
+                color: mode === filter.value ? colors.accent : colors.textSoft,
                 fontSize: 14,
                 lineHeight: 1.2,
-                transition: "background-color 180ms ease, color 180ms ease",
+                transition: transitions.backgroundAndColor,
                 "&:hover": {
                   backgroundColor:
-                    mode === filter.value ? "#e4efff" : "#f8fafc",
+                    mode === filter.value
+                      ? colors.activeHoverBg
+                      : colors.inputBg,
                 },
               }}
             >
@@ -205,9 +196,9 @@ export const SearchPage = () => {
           elevation={0}
           sx={{
             p: 3,
-            borderRadius: 4,
-            border: "1px solid #e2e8f0",
-            backgroundColor: "#ffffff",
+            borderRadius: radius.lg,
+            border: `1px solid ${colors.border}`,
+            backgroundColor: colors.surface,
             textAlign: "center",
           }}
         >
@@ -215,7 +206,7 @@ export const SearchPage = () => {
             sx={{
               fontSize: 18,
               fontWeight: 600,
-              color: "#0f172a",
+              color: colors.text,
               mb: 1,
             }}
           >
@@ -225,7 +216,7 @@ export const SearchPage = () => {
             sx={{
               fontSize: 14,
               lineHeight: 1.5,
-              color: "#64748b",
+              color: colors.textMuted,
             }}
           >
             Попробуй изменить запрос или выбрать другой фильтр
@@ -247,7 +238,7 @@ export const SearchPage = () => {
                   sx={{
                     fontSize: 20,
                     fontWeight: 700,
-                    color: "#0f172a",
+                    color: colors.text,
                   }}
                 >
                   Пользователи
@@ -268,9 +259,9 @@ export const SearchPage = () => {
                     elevation={0}
                     sx={{
                       p: 2,
-                      borderRadius: 4,
-                      border: "1px solid #e2e8f0",
-                      backgroundColor: "#ffffff",
+                      borderRadius: radius.lg,
+                      border: `1px solid ${colors.border}`,
+                      backgroundColor: colors.surface,
                     }}
                   >
                     <Box
@@ -296,7 +287,7 @@ export const SearchPage = () => {
                           sx={{
                             fontSize: 17,
                             fontWeight: 500,
-                            color: "#0f172a",
+                            color: colors.text,
                             lineHeight: 1.2,
                           }}
                         >
@@ -307,7 +298,7 @@ export const SearchPage = () => {
                           sx={{
                             fontSize: 15,
                             lineHeight: 1.5,
-                            color: "#334765",
+                            color: colors.textSoft,
                           }}
                         >
                           @{user.tag}
@@ -335,7 +326,7 @@ export const SearchPage = () => {
                   sx={{
                     fontSize: 20,
                     fontWeight: 700,
-                    color: "#0f172a",
+                    color: colors.text,
                   }}
                 >
                   Посты
@@ -349,9 +340,7 @@ export const SearchPage = () => {
                   overflow: "auto",
                 }}
               >
-                {Posts.map((_, index) => (
-                  <PostComponent key={index}></PostComponent>
-                ))}
+                <PostsList posts={mockPosts} />
               </Box>
             </Box>
           )}

@@ -1,7 +1,7 @@
-import { Box } from "@mui/material";
-import { Notification } from "../components/Notification";
-import type { NotificationType } from "../types/Notification";
-import SocialIcon from "../../public/icon-social.svg";
+﻿import { Box } from "@mui/material";
+import { Notification, type NotificationType } from "@features/notifications";
+import SocialIcon from "@public/icon-social.svg";
+import { Title } from "@shared/ui";
 
 export const NotificationsPage = () => {
   const Notifications: NotificationType[] = [
@@ -37,17 +37,10 @@ export const NotificationsPage = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-start",
+        py: 2,
       }}
     >
-      <Box
-        sx={{
-          pt: 2,
-          fontSize: "22px",
-          fontWeight: "700",
-        }}
-      >
-        Уведомления
-      </Box>
+      <Title text="Уведомления" fontSize={22} />
 
       {Notifications.map((elem) => {
         return <Notification key={elem.id} notification={elem} />;

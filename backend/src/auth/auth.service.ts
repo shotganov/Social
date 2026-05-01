@@ -36,10 +36,11 @@ export class AuthService {
     }
 
     const payload = { userId: user.id, role: user.role };
+    const { passwordHash, ...userData } = user;
 
     return {
       token: await this.jwtService.signAsync(payload),
-      user: user,
+      user: userData,
     };
   }
 
